@@ -1,15 +1,42 @@
 import React from 'react'
 import { Link } from 'gatsby'
 
-import Layout from '../components/layout'
+import Layout from '../components/layout';
+import myTextBox from '../components/myTextBox';
 
-const IndexPage = () => (
-  <Layout>
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <Link to="/page-2/">Go to page 2</Link>
-  </Layout>
-)
+export default class IndexPage extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = {phone: ''};
 
-export default IndexPage
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleChange(event) {
+        this.setState({phone: event.target.value});
+    }
+
+    handleSubmit(event) {
+        console.log('submitted name is::::',this.state.phone);
+    }
+
+    render() {
+        return (
+            <Layout>
+                <form onSubmit={this.handleSubmit}>
+                    <label>
+                        <input
+                            type="text"
+                            value={this.state.value}
+                            onChange={this.handleChange}
+                            placeholder={"enter phone number to login"}
+                        />
+                    </label>
+                    <input type="submit" value="Submit" />
+                </form>
+                < myTextBox />
+            </Layout>
+        );
+    }
+}
